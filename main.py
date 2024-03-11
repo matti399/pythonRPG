@@ -1,16 +1,68 @@
-# This is a sample Python script.
-
-# Press Umschalt+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import Player
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Strg+F8 to toggle the breakpoint.
+def show_controls():
+    # show how to control your Character
+    print('''
+    Welcome to your own RPG Game
+    ----------------------------
+    
+    Get to the Garden with a key and a potion.
+    Avoid the monsters!
+    
+    Commands:
+    go [direction]
+    get [item]
+    status
+    exit
+    ''')
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+def player_commands():
+    # dictionary of all viable player inputs
+    inputs = [
+        'go',
+        'get',
+        'exit',
+        'status'
+    ]
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+def show_location():
+    # print the player's current status
+    print('---------------------------')
+    print('You are in the ' + current_room)
+    # print an item if there is one
+    if "item" in rooms[current_room]:
+        print('You see a ' + rooms[current_room]['item'])
+    print("---------------------------")
+
+
+def show_status():
+    print('---------------------------')
+    print('You Level is ' + str(player.level))
+    print('You have ' + str(player.health) + '/10 Health left.')
+    print('Inventory : ' + str(player.inventory))
+    print("---------------------------")
+
+
+current_room = 'Hall'
+
+rooms = {
+    'Hall': {
+        'south': 'Kitchen'
+    },
+    'Kitchen': {
+        'north': 'Hall'
+    }
+}
+
+# Main Program runtime
+show_controls()
+player = Player.Player
+print('Enter your Player Name: ')
+player.name = input()
+while True:
+    show_location()
+    player_input = input()
+    break
