@@ -1,3 +1,21 @@
+from random import *
+
+
+def generate_dungeon():
+    # generate a 5x5 grid of rooms with the start point in the top row
+    # and the garden in the bottom row
+    grid = [
+        0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0,
+    ]
+    grid[randint(0, 4)] = 'Start_Hall'
+    grid[randint(20, 24)] = 'Garden'
+    return grid
+
+
 class Dungeon:
     current_location = 'Start_Hall'
     possible_rooms = {
