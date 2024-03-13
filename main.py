@@ -6,6 +6,7 @@ Dungeon.current_map = generate_dungeon()
 show_controls()
 print('Enter your Player Name: ')
 Player.name = input()
+line_delimiter()
 show_map(Dungeon.current_map)
 show_location()
 while True:
@@ -28,3 +29,4 @@ while True:
             break
         case _:
             print('This was not a valid input.')
+            line_delimiter()

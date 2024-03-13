@@ -20,36 +20,34 @@ status
 map
 exit
     ''')
+    line_delimiter()
 
 
 def show_location():
     # print the player's current status
-    print('---------------------------')
     print('You are in the ' + Dungeon.current_map[Player.current_location])
     # print an item if there is one
     # if "item" in Dungeon.possible_rooms[Player.current_location]:
     #     print('You see a ' + Dungeon.possible_rooms[Player.current_location]['item'])
-    print("---------------------------")
+    line_delimiter()
 
 
 def update_location():
     # print the player's current status
-    print('---------------------------')
     print('You got to a ' + Dungeon.current_map[Player.current_location])
     # print an item if there is one
     # if "item" in Dungeon.possible_rooms[Player.current_location]:
     #     print('You see a ' + Dungeon.possible_rooms[Player.current_location]['item'])
-    print("---------------------------")
+    line_delimiter()
 
 
 def show_status():
     # show the current player status
-    print('---------------------------')
     print('Name: ' + str(Player.name))
     print('You Level is ' + str(Player.level))
     print('You have ' + str(Player.health) + '/10 Health left.')
     print('Inventory : ' + str(Player.inventory))
-    print("---------------------------")
+    line_delimiter()
 
 
 def grid_neuter(grid):
@@ -70,39 +68,50 @@ def grid_neuter(grid):
 def show_map(grid):
     # show the map to the player
     x = grid_neuter(copy(grid))
-    print('---------------------------')
     print('Map of the Current Level:')
     print(x[0] + x[1] + x[2] + x[3] + x[4])
     print(x[5] + x[6] + x[7] + x[8] + x[9])
     print(x[10] + x[11] + x[12] + x[13] + x[14])
     print(x[15] + x[16] + x[17] + x[18] + x[19])
     print(x[20] + x[21] + x[22] + x[23] + x[24])
-    print('---------------------------')
+    line_delimiter()
 
 
 def player_move(movement_option):
+    # move the player through the dungeon
     match movement_option:
         case 'north':
             if Player.current_location - 5 < 0:
-                print('You can not go there.\n')
+                print('You can not go there.')
+                line_delimiter()
             else:
                 Player.current_location -= 5
                 update_location()
         case 'south':
             if Player.current_location + 5 < 0:
                 print('You can not go there.')
+                line_delimiter()
             else:
                 Player.current_location += 5
                 update_location()
         case 'west':
             if Player.current_location in (0, 5, 10, 15, 20):
                 print('You can not go there.')
+                line_delimiter()
             else:
                 Player.current_location -= 1
                 update_location()
         case 'east':
             if Player.current_location in (4, 9, 14, 19, 24):
                 print('You can not go there.')
+                line_delimiter()
             else:
                 Player.current_location += 1
                 update_location()
+        case _:
+            print('This was not a valid input.')
+            line_delimiter()
+
+
+def line_delimiter():
+    print('\n---------------------------\n')

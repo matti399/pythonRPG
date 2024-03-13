@@ -48,11 +48,11 @@ def select_room(grid, x):
         case 1:
             grid[x] = 'Kitchen'
         case 2:
-            grid[x] = 'Barracks'
+            grid[x] = 'Barrack'
         case 3:
             grid[x] = 'Hall'
         case 4:
-            grid[x] = 'Tombs'
+            grid[x] = 'Tomb'
         case 5:
             grid[x] = 'Dining_Room'
 
