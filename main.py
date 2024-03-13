@@ -1,22 +1,19 @@
-from Player import Player
-from Dungeon import Dungeon
 from Dungeon import generate_dungeon
-from copy import copy
 from func import *
 
 # Main Program runtime
+Dungeon.current_map = generate_dungeon()
 show_controls()
 print('Enter your Player Name: ')
 Player.name = input()
-dungeon_map = generate_dungeon()
-show_map(dungeon_map)
+show_map(Dungeon.current_map)
 show_location()
 while True:
-    player_input = input()
+    player_input = input().lower().split(' ')
 
-    match player_input:
+    match player_input[0]:
         case 'go':
-            print('got there')
+            player_move(player_input[1])
         case 'get':
             print('item get')
         case 'location':
@@ -24,9 +21,9 @@ while True:
         case 'status':
             show_status()
         case 'map':
-            show_map(dungeon_map)
+            show_map(Dungeon.current_map)
         case 'admin_map':
-            print(dungeon_map)
+            print(Dungeon.current_map)
         case 'exit':
             break
         case _:

@@ -1,5 +1,6 @@
 from random import *
 from copy import copy
+from Player import Player
 
 
 def generate_dungeon():
@@ -17,6 +18,7 @@ def generate_dungeon():
         if i == 0:
             location_pointer = randint(0, 4)
             grid[copy(location_pointer)] = 'Start_Hall'
+            Player.current_location = location_pointer
         x = select_next_location(location_pointer)
         location_pointer = x
         if grid[x] == 0:
@@ -56,7 +58,7 @@ def select_room(grid, x):
 
 
 class Dungeon:
-    current_location = 'Start_Hall'
+    current_map = []
     possible_rooms = {
         'Start_Hall': {
             'enemies': 0,
@@ -70,7 +72,7 @@ class Dungeon:
             'enemies': 1,
             'danger_rating': 1
         },
-        'Barracks': {
+        'Barrack': {
             'enemies': 2,
             'danger_rating': 1
         },
@@ -78,7 +80,7 @@ class Dungeon:
             'enemies': 2,
             'danger_rating': 1
         },
-        'Tombs': {
+        'Tomb': {
             'enemies': 1,
             'danger_rating': 2
         },

@@ -1,5 +1,5 @@
-from Player import Player
 from Dungeon import Dungeon
+from Player import Player
 from copy import copy
 
 
@@ -13,7 +13,7 @@ Get to the Garden with a key and a potion.
 Avoid the monsters!
 
 Commands:
-go [direction]
+go [north, south, west, east]
 get [item]
 location
 status
@@ -25,10 +25,20 @@ exit
 def show_location():
     # print the player's current status
     print('---------------------------')
-    print('You are in the ' + Dungeon.current_location)
+    print('You are in the ' + Dungeon.current_map[Player.current_location])
     # print an item if there is one
-    if "item" in Dungeon.possible_rooms[Dungeon.current_location]:
-        print('You see a ' + Dungeon.possible_rooms[Dungeon.current_location]['item'])
+    # if "item" in Dungeon.possible_rooms[Player.current_location]:
+    #     print('You see a ' + Dungeon.possible_rooms[Player.current_location]['item'])
+    print("---------------------------")
+
+
+def update_location():
+    # print the player's current status
+    print('---------------------------')
+    print('You got to a ' + Dungeon.current_map[Player.current_location])
+    # print an item if there is one
+    # if "item" in Dungeon.possible_rooms[Player.current_location]:
+    #     print('You see a ' + Dungeon.possible_rooms[Player.current_location]['item'])
     print("---------------------------")
 
 
@@ -47,7 +57,7 @@ def grid_neuter(grid):
     grid_neutered = grid
     i = 0
     while i < 25:
-        if grid[i] == Dungeon.current_location:
+        if i == Player.current_location:
             grid_neutered[i] = '[x]'
         elif grid[i] != 0:
             grid_neutered[i] = '[ ]'
@@ -68,3 +78,31 @@ def show_map(grid):
     print(x[15] + x[16] + x[17] + x[18] + x[19])
     print(x[20] + x[21] + x[22] + x[23] + x[24])
     print('---------------------------')
+
+
+def player_move(movement_option):
+    match movement_option:
+        case 'north':
+            if Player.current_location - 5 < 0:
+                print('You can not go there.\n')
+            else:
+                Player.current_location -= 5
+                update_location()
+        case 'south':
+            if Player.current_location + 5 < 0:
+                print('You can not go there.')
+            else:
+                Player.current_location += 5
+                update_location()
+        case 'west':
+            if Player.current_location in (0, 5, 10, 15, 20):
+                print('You can not go there.')
+            else:
+                Player.current_location -= 1
+                update_location()
+        case 'east':
+            if Player.current_location in (4, 9, 14, 19, 24):
+                print('You can not go there.')
+            else:
+                Player.current_location += 1
+                update_location()
