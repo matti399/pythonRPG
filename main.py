@@ -1,6 +1,7 @@
 from Player import Player
 from Dungeon import Dungeon
 from Dungeon import generate_dungeon
+from copy import copy
 from func import *
 
 # Main Program runtime
@@ -24,6 +25,8 @@ while True:
             show_status()
         case 'map':
             show_map(dungeon_map)
+        case 'admin_map':
+            print(dungeon_map)
         case 'exit':
             break
         case _:

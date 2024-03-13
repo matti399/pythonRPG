@@ -1,5 +1,6 @@
 from Player import Player
 from Dungeon import Dungeon
+from copy import copy
 
 
 def show_controls():
@@ -14,7 +15,9 @@ Avoid the monsters!
 Commands:
 go [direction]
 get [item]
+location
 status
+map
 exit
     ''')
 
@@ -40,6 +43,7 @@ def show_status():
 
 
 def grid_neuter(grid):
+    # format the grit and replace room names with braces
     grid_neutered = grid
     i = 0
     while i < 25:
@@ -54,7 +58,8 @@ def grid_neuter(grid):
 
 
 def show_map(grid):
-    x = grid_neuter(grid)
+    # show the map to the player
+    x = grid_neuter(copy(grid))
     print('---------------------------')
     print('Map of the Current Level:')
     print(x[0] + x[1] + x[2] + x[3] + x[4])
