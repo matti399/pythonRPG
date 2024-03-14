@@ -1,6 +1,8 @@
+from random import randint
 from Dungeon import Dungeon
 from Player import Player
 from copy import copy
+from math import ceil
 
 
 def show_controls():
@@ -111,6 +113,42 @@ def player_move(movement_option):
         case _:
             print('This was not a valid input.')
             line_delimiter()
+
+
+def populate_rooms_with_enemies(current_map):
+    monster_map = copy(current_map)
+    for index, room in enumerate(monster_map):
+        if room != 0:
+            enemies_in_room = []
+            enemy_count = randint(0, Dungeon.possible_rooms[room]['enemies'])
+            danger_level = Dungeon.possible_rooms[room]['danger_rating']
+            i = 0
+            while i < enemy_count:
+                enemy = Dungeon.possible_enemies[randint(0, danger_level)]
+                match enemy:
+                    case 'Skeleton':
+                        level = int(randint(1, 4))
+                        health = ceil(level * 1.5)
+                        strength = ceil(level * 1.2)
+                        enemies_in_room.append(['Skeleton', level, health, strength])
+                    case 'Undead':
+                        level = randint(2, 6)
+                        health = ceil(level * 1.6)
+                        strength = ceil(level * 1.4)
+                        enemies_in_room.append(['Skeleton', level, health, strength])
+                    case 'Reptilian_Humanoid':
+                        level = randint(4, 7)
+                        health = ceil(level * 2)
+                        strength = ceil(level * 1.6)
+                        enemies_in_room.append(['Skeleton', level, health, strength])
+                    case 'Lich':
+                        level = randint(5, 9)
+                        health = ceil(level * 1.3)
+                        strength = ceil(level * 2)
+                        enemies_in_room.append(['Skeleton', level, health, strength])
+                i += 1
+            monster_map[index] = enemies_in_room
+    return monster_map
 
 
 def line_delimiter():

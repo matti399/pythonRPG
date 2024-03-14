@@ -3,6 +3,9 @@ from func import *
 
 # Main Program runtime
 Dungeon.current_map = generate_dungeon()
+enemy_map = populate_rooms_with_enemies(Dungeon.current_map)
+print(enemy_map)
+exit(0)
 show_controls()
 print('Enter your Player Name: ')
 Player.name = input()

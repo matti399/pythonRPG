@@ -1,4 +1,4 @@
-from random import *
+from random import randint
 from copy import copy
 from Player import Player
 
@@ -89,25 +89,9 @@ class Dungeon:
             'danger_rating': 3
         },
     }
-    possible_enemies = {
-        'Skeleton': {
-            'level': randint(1, 4),
-            'health': '',
-            'strength': '',
-        },
-        'Undead': {
-            'level': randint(2, 6),
-            'health': '',
-            'strength': '',
-        },
-        'Reptilian_Humanoid': {
-            'level': randint(4, 7),
-            'health': '',
-            'strength': '',
-        },
-        'Lich': {
-            'level': randint(5, 9),
-            'health': '',
-            'strength': '',
-        },
-    }
+    possible_enemies = [
+        'Skeleton',
+        'Undead',
+        'Reptilian_Humanoid',
+        'Lich'
+    ]
