@@ -20,7 +20,8 @@ get [item]
 location
 status
 map
-exit
+leave
+exit !exits Game without saving!
     ''')
     line_delimiter()
 
@@ -149,6 +150,31 @@ def populate_rooms_with_enemies(current_map):
                 i += 1
             monster_map[index] = enemies_in_room
     return monster_map
+
+
+def spread_out_items(current_map):
+    # spread the items across the rooms, allways put the Sword in the Start_Hall
+    item_map = copy(current_map)
+    i = 0
+    while i < 4:
+        x = randint(0, 23)
+        if item_map[x] != 0 and item_map[x] != 'Start_Hall' and item_map[x] != 'Garden':
+            if not Dungeon.possible_item.__contains__(item_map[x]):
+                item_map[x] = Dungeon.possible_item[i]
+                i += 1
+    for room in item_map:
+        if item_map[room] == 'Start_Hall':
+            item_map[room] = 'Sword'
+        if not Dungeon.possible_item.__contains__(item_map[room]):
+            item_map = 0
+
+    return item_map
+
+
+def dd(x):
+    print(x)
+    exit(0)
+
 
 
 def line_delimiter():

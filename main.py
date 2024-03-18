@@ -1,11 +1,11 @@
 from Dungeon import generate_dungeon
 from func import *
 
-# Main Program runtime
+
 Dungeon.current_map = generate_dungeon()
 enemy_map = populate_rooms_with_enemies(Dungeon.current_map)
-print(enemy_map)
-exit(0)
+item_map = spread_out_items(Dungeon.current_map)
+dd(item_map)
 show_controls()
 print('Enter your Player Name: ')
 Player.name = input()
@@ -28,8 +28,14 @@ while True:
             show_map(Dungeon.current_map)
         case 'admin_map':
             print(Dungeon.current_map)
+        case 'leave':
+            if show_location() == 'Garden' and Player.inventory.__contains__('Exit_Key'):
+                print('You got out of the Dungeon and Survived to live another day.\n')
+                print('A save feature will be implemented later\n')
+                print('Thank you for Playing\n')
+                exit(0)
         case 'exit':
-            break
+            exit(0)
         case _:
             print('This was not a valid input.')
             line_delimiter()

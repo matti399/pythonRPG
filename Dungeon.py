@@ -16,7 +16,7 @@ def generate_dungeon():
     i = 0
     while i < randint(7, 9):
         if i == 0:
-            location_pointer = randint(0, 4)
+            location_pointer = randint(0, 3)
             grid[copy(location_pointer)] = 'Start_Hall'
             Player.current_location = location_pointer
         x = select_next_location(location_pointer)
@@ -31,6 +31,7 @@ def generate_dungeon():
 
 
 def select_next_location(location_pointer):
+    # chooses the location for the next room in a way that the dungeon is completable
     current_room = copy(location_pointer)
     if current_room in (0, 5, 10, 15, 20):
         options = [current_room + 5, current_room + 1]
@@ -94,4 +95,11 @@ class Dungeon:
         'Undead',
         'Reptilian_Humanoid',
         'Lich'
+    ]
+    possible_item = [
+        'Exit_Key',
+        'Health_Potion',
+        'Magic_Wand',
+        'Armor',
+        'Sword'
     ]
