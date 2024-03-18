@@ -16,7 +16,7 @@ def generate_dungeon():
     i = 0
     while i < randint(7, 9):
         if i == 0:
-            location_pointer = randint(0, 3)
+            location_pointer = randint(0, 4)
             grid[copy(location_pointer)] = 'Start_Hall'
             Player.current_location = location_pointer
         x = select_next_location(location_pointer)
@@ -60,6 +60,8 @@ def select_room(grid, x):
 
 class Dungeon:
     current_map = []
+    item_map = []
+    enemy_map = []
     possible_rooms = {
         'Start_Hall': {
             'enemies': 0,
@@ -97,9 +99,9 @@ class Dungeon:
         'Lich'
     ]
     possible_item = [
-        'Exit_Key',
-        'Health_Potion',
-        'Magic_Wand',
-        'Armor',
-        'Sword'
+        'exit_key',
+        'health_potion',
+        'magic_wand',
+        'armor',
+        'sword'
     ]

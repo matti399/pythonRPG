@@ -3,9 +3,8 @@ from func import *
 
 
 Dungeon.current_map = generate_dungeon()
-enemy_map = populate_rooms_with_enemies(Dungeon.current_map)
-item_map = spread_out_items(Dungeon.current_map)
-dd(item_map)
+Dungeon.enemy_map = populate_rooms_with_enemies(Dungeon.current_map)
+Dungeon.item_map = spread_out_items(Dungeon.current_map)
 show_controls()
 print('Enter your Player Name: ')
 Player.name = input()
@@ -19,7 +18,14 @@ while True:
         case 'go':
             player_move(player_input[1])
         case 'get':
-            print('item get')
+            if (Dungeon.item_map[Player.current_location]) == player_input[1]:
+                Player.inventory.append(Dungeon.item_map[Player.current_location])
+                print('You picked up a ' + Dungeon.item_map[Player.current_location])
+                Dungeon.item_map.pop(Player.current_location)
+            else:
+                print('No Item like that.\n')
+        case 'inventory':
+            show_inventory()
         case 'location':
             show_location()
         case 'status':

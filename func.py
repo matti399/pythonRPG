@@ -18,6 +18,7 @@ Commands:
 go [north, south, west, east]
 get [item]
 location
+inventory
 status
 map
 leave
@@ -30,8 +31,8 @@ def show_location():
     # print the player's current status
     print('You are in the ' + Dungeon.current_map[Player.current_location])
     # print an item if there is one
-    # if "item" in Dungeon.possible_rooms[Player.current_location]:
-    #     print('You see a ' + Dungeon.possible_rooms[Player.current_location]['item'])
+    if Dungeon.item_map[Player.current_location] != 0:
+        print('You see a ' + Dungeon.item_map[Player.current_location])
     line_delimiter()
 
 
@@ -39,8 +40,8 @@ def update_location():
     # print the player's current status
     print('You got to a ' + Dungeon.current_map[Player.current_location])
     # print an item if there is one
-    # if "item" in Dungeon.possible_rooms[Player.current_location]:
-    #     print('You see a ' + Dungeon.possible_rooms[Player.current_location]['item'])
+    if Dungeon.item_map[Player.current_location] != 0:
+        print('You see a ' + Dungeon.item_map[Player.current_location])
     line_delimiter()
 
 
@@ -50,6 +51,13 @@ def show_status():
     print('You Level is ' + str(Player.level))
     print('You have ' + str(Player.health) + '/10 Health left.')
     print('Inventory : ' + str(Player.inventory))
+    line_delimiter()
+
+
+def show_inventory():
+    print('You have the following items in your inventory: ')
+    for item in Player.inventory:
+        print(item)
     line_delimiter()
 
 
@@ -162,19 +170,23 @@ def spread_out_items(current_map):
             if not Dungeon.possible_item.__contains__(item_map[x]):
                 item_map[x] = Dungeon.possible_item[i]
                 i += 1
-    for room in item_map:
-        if item_map[room] == 'Start_Hall':
-            item_map[room] = 'Sword'
-        if not Dungeon.possible_item.__contains__(item_map[room]):
-            item_map = 0
+    for index, room in enumerate(item_map):
+        # place the sword in the start room
+        if room == 'Start_Hall':
+            item_map[index] = 'sword'
+
+    for index, room in enumerate(item_map):
+        # remove left over room names from the item map
+        if not Dungeon.possible_item.__contains__(room):
+            item_map[index] = 0
 
     return item_map
 
 
 def dd(x):
+    # die and dump function
     print(x)
     exit(0)
-
 
 
 def line_delimiter():
