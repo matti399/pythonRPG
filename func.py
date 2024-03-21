@@ -3,6 +3,7 @@ from Dungeon import Dungeon
 from Player import Player
 from copy import copy
 from math import ceil
+from math import floor
 
 
 def show_controls():
@@ -21,6 +22,8 @@ location
 inventory
 status
 map
+attack
+sneak
 leave
 exit !exits Game without saving!
     ''')
@@ -42,6 +45,9 @@ def update_location():
     # print an item if there is one
     if Dungeon.item_map[Player.current_location] != 0:
         print('You see a ' + Dungeon.item_map[Player.current_location])
+    if Dungeon.enemy_map[Player.current_location] != 0 and Dungeon.enemy_map[Player.current_location] != []:
+        for Enemy in Dungeon.enemy_map[Player.current_location]:
+            print('You see an ' + Enemy[0] + ' in this Room.')
     line_delimiter()
 
 
@@ -181,6 +187,32 @@ def spread_out_items(current_map):
             item_map[index] = 0
 
     return item_map
+
+
+def enemy_stats():
+    for Enemy in Dungeon.enemy_map[Player.current_location]:
+        print('Name: ' + str(Enemy[0]))
+        print('Level: ' + str(Enemy[1]))
+        print('Health: ' + str(Enemy[2]))
+        print('Strength: ' + str(Enemy[3]))
+        line_delimiter()
+
+
+def player_attack(player_input):
+    player_damage = floor(Player.level+2*1.2)
+    enemy_damage = floor(Dungeon.enemy_map[Player.current_location][3]*0.25)
+    for index, Enemy in enumerate(Dungeon.enemy_map[Player.current_location]):
+        if str(player_input) == str(Enemy[0]):
+            print('You attacked the ' + str(Enemy[0]) + ' and dealt ' + str(player_damage) + 'damage.')
+            Enemy[2] = Enemy[2] - player_damage
+            if Enemy[2] <= 0:
+                print('You killed ' + str(Enemy[0]))
+                Dungeon.enemy_map[Player.current_location].pop([index])
+            else:
+                if enemy_damage <= 0:
+                    enemy_damage = 1
+                print('It hit you back and did ' + str(enemy_damage))
+                Player.health = Player.health - enemy_damage
 
 
 def dd(x):
