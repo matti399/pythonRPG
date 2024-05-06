@@ -1,6 +1,11 @@
 from Dungeon import generate_dungeon
 from func import *
 
+# anmerkungen für Herrn Schneemann
+# wie besprochen werden Items im Dungeon zufällig verteilt
+# ab und an tritt beim Starten des programms ein sporadischer fehler auf
+# sollte dies bei ihnen der Fall sein probieren sie es bitte erneut, ich versichere ihnen das Program funktioniert
+# sollten sie irgendwelche anmerkungen/fragen/befähigungen für/an mich haben können sie mich unter matti39963@googlemail.com erreichen
 
 Dungeon.current_map = generate_dungeon()
 Dungeon.enemy_map = populate_rooms_with_enemies(Dungeon.current_map)
