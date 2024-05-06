@@ -1,5 +1,7 @@
 # Basic Python RPG
 
+https://github.com/matti399/pythonRPG
+
 This Python program is made for educational purposes.
 It is a very basic text bases RPG with some elements of the Rouge-Like genre.
 Dungeon are randomly generated and so are the enemies and items along the way.
