@@ -199,20 +199,34 @@ def enemy_stats():
 
 
 def player_attack(player_input):
-    player_damage = floor(Player.level+2*1.2)
-    enemy_damage = floor(Dungeon.enemy_map[Player.current_location][3]*0.25)
-    for index, Enemy in enumerate(Dungeon.enemy_map[Player.current_location]):
-        if str(player_input) == str(Enemy[0]):
-            print('You attacked the ' + str(Enemy[0]) + ' and dealt ' + str(player_damage) + 'damage.')
-            Enemy[2] = Enemy[2] - player_damage
-            if Enemy[2] <= 0:
-                print('You killed ' + str(Enemy[0]))
-                Dungeon.enemy_map[Player.current_location].pop([index])
+    player_damage = floor(Player.level + 2 * 1.2)
+    enemies_in_room = Dungeon.enemy_map[Player.current_location]
+    print(enemies_in_room)
+
+    print("Player attacking:", player_input)
+
+    for enemy in enemies_in_room:
+        enemy_type, enemy_level, enemy_health, enemy_strength = enemy
+
+        print("Enemy present:", enemy_type)
+
+        if str(player_input).lower() == str(enemy_type).lower():
+            print('You attacked the ' + enemy_type + ' and dealt ' + str(player_damage) + ' damage.')
+            enemy_health -= player_damage
+
+            if enemy_health <= 0:
+                print('You killed the ' + enemy_type)
+                enemies_in_room.remove(enemy)  # Remove the defeated enemy from the room
+                break
             else:
-                if enemy_damage <= 0:
-                    enemy_damage = 1
-                print('It hit you back and did ' + str(enemy_damage))
-                Player.health = Player.health - enemy_damage
+                print('It hit you back and did ' + str(enemy_strength) + ' damage.')
+                Player.health -= enemy_strength
+
+                if Player.health <= 0:
+                    print('You were killed by the ' + enemy_type + '. Game Over!')
+                    exit(0)
+    else:
+        print("No enemy matching the input found.")
 
 
 def dd(x):

@@ -12,7 +12,12 @@ line_delimiter()
 show_map(Dungeon.current_map)
 show_location()
 while True:
-    player_input = input().lower().split(' ')
+    user_input = input().strip()
+    player_input = user_input.split()
+
+    if player_input is None:
+        print('This was not a valid input.')
+        line_delimiter()
 
     match player_input[0]:
         case 'go':

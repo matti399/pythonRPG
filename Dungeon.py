@@ -83,11 +83,11 @@ class Dungeon:
             'danger_rating': 1
         },
         'Library': {
-            'enemies': 2,
+            'enemies': 1,
             'danger_rating': 1
         },
         'Hall': {
-            'enemies': 2,
+            'enemies': 1,
             'danger_rating': 1
         },
         'Tomb': {
@@ -107,12 +107,17 @@ class Dungeon:
             'danger_rating': 3
         }
     }
+
+    # all enemies can spawn anywhere in the dungeon
+    # except for the start hall and the garden witch is allways free of monsters
     possible_enemies = [
         'Skeleton',
         'Undead',
         'Reptilian_Humanoid',
         'Lich'
     ]
+
+    # all items can spawn anywhere in the dungeon except for the start hall and the garden witch is allways fixed
     possible_item = [
         'exit_key',
         'health_potion',
