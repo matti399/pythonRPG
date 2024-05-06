@@ -54,14 +54,21 @@ while True:
             print(Dungeon.current_map)
         case 'admin_enemy':
             print(Dungeon.enemy_map)
+        case 'admin_items':
+            print(Dungeon.item_map)
         case 'leave':
             if Dungeon.current_map[Player.current_location] == 'Garden' and Player.inventory.__contains__('exit_key'):
                 print('You got out of the Dungeon and Survived to live another day.\n')
                 print('A save feature will be implemented later\n')
                 print('Thank you for Playing\n')
                 exit(0)
-        case 'exit':
-            exit(0)
+            elif Dungeon.current_map[Player.current_location] == 'Laboratory' and Player.inventory.__contains__('BookOfLife') and Player.inventory.__contains__('Beam-O-Mat'):
+                print('You got out of the Dungeon and Survived to live another day.\n')
+                print('A save feature will be implemented later\n')
+                print('Thank you for Playing\n')
+                exit(0)
+            else:
+                print('You have not yet met the conditions to leave this place, keep searching you will find them.')
         case _:
             print('This was not a valid input.')
             line_delimiter()

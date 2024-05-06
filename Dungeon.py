@@ -6,6 +6,7 @@ from Player import Player
 def generate_dungeon():
     # generate a 5x5 grid of rooms with the start point in the top row
     # and the garden at the bottom end
+    # this is done in this way to limit dungeon size and make it easier to make a simple dungeon generator
     grid = [
         0, 0, 0, 0, 0,
         0, 0, 0, 0, 0,
@@ -43,19 +44,25 @@ def select_next_location(location_pointer):
     return options[randint(0, len(options)-1)]
 
 
+# set the room in the map grid which is hidden to the player
+# this is separated so that the player can't influence this
 def select_room(grid, x):
-    room_type = randint(1, 5)
+    room_type = randint(1, 7)
     match room_type:
         case 1:
             grid[x] = 'Kitchen'
         case 2:
-            grid[x] = 'Barrack'
+            grid[x] = 'Library'
         case 3:
             grid[x] = 'Hall'
         case 4:
             grid[x] = 'Tomb'
         case 5:
             grid[x] = 'Dining_Room'
+        case 6:
+            grid[x] = 'Office'
+        case 7:
+            grid[x] = 'Laboratory'
 
 
 class Dungeon:
@@ -75,7 +82,7 @@ class Dungeon:
             'enemies': 1,
             'danger_rating': 1
         },
-        'Barrack': {
+        'Library': {
             'enemies': 2,
             'danger_rating': 1
         },
@@ -91,6 +98,14 @@ class Dungeon:
             'enemies': 1,
             'danger_rating': 3
         },
+        'Office': {
+            'enemies': 1,
+            'danger_rating': 1
+        },
+        'Laboratory': {
+            'enemies': 1,
+            'danger_rating': 3
+        }
     }
     possible_enemies = [
         'Skeleton',
@@ -102,6 +117,8 @@ class Dungeon:
         'exit_key',
         'health_potion',
         'magic_wand',
+        'sword',
+        'BookOfLife',
+        'Beam-O-Mat',
         'armor',
-        'sword'
     ]

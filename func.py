@@ -25,7 +25,6 @@ map
 attack
 sneak
 leave
-exit !exits Game without saving!
     ''')
     line_delimiter()
 
@@ -69,6 +68,7 @@ def show_inventory():
 
 def grid_neuter(grid):
     # format the grit and replace room names with braces
+    # this is so that the player has a map without any room names or information
     grid_neutered = grid
     i = 0
     while i < 25:
@@ -170,7 +170,7 @@ def spread_out_items(current_map):
     # spread the items across the rooms, allways put the Sword in the Start_Hall
     item_map = copy(current_map)
     i = 0
-    while i < 4:
+    while i < 6:
         x = randint(0, 23)
         if item_map[x] != 0 and item_map[x] != 'Start_Hall' and item_map[x] != 'Garden':
             if not Dungeon.possible_item.__contains__(item_map[x]):
